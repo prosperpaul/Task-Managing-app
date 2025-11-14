@@ -1,90 +1,87 @@
-import React, {useState} from "react"
+import React from "react";
+import { useState } from "react";
+import useTaskStore from "../store/taskStore";
 
-export default function TaskForm ({ addTask }){
-   //Local state for the form fields
-   const[title, setTitle] = useState('')
-   const[priority, setPriority] = useState('meduim')
-   const[deadline, setDeadline] = useState('')
+export default function TaskForm() {
+  // Local state for form fields
+  const [title, setTitle] = useState("");
+  const [priority, setPriority] = useState("medium");
+  const [dueDate, setDueDate] = useState("");
+  const [notes, setNotes] = useState("");
 
-   //Helper to reset the form after adding
-   function clearForm(){
-    setTitle('')
-    setPriority("meduim")
-    setDeadline("")
-   }
+  // Add function from Zustand store
+  const addTask = useTaskStore((state) => state.addTask);
 
-   // Called when user submits the form (click button or press Enter)
-function handleSubmit(e){
-  e.preventDafault()   // prevent page reload (default form behaviour)
+  // Submit handler
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const trimmed = title.trim()
-  if(!trimmed){
-     // simple validation: require a non-empty title
-      // you could show an error message instead of alert
-      alert("Please enter a task name.")
-      return
-  }
-  
-  //Build the task object shape expected by App.jsx
-const newTask = {
-  id: Date.now().toString(36),
-  title: trimmed,
-  priority,
-  deadline: deadline || null,
-  completed: false,
-  createAt: new Date().toISOString()
-}
+    if (title.trim() === "") return alert("Task title cannot be empty");
 
- // Call parent-provided function to add the task to app state
-  addTask(newTask)
+    addTask({
+      title,
+      priority,
+      dueDate,
+      notes,
+    });
 
-  // Clear the inputs and focus the title for faster entry
-  clearForm()
+    // Reset form fields
+    setTitle("");
+    setPriority("medium");
+    setDueDate("");
+    setNotes("");
+  };
 
-  // move focus back to title input for convenience:
-  const el = document.getElementById("task-title-input")
-  if (el) el.focus()
-}
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-5 rounded-xl shadow-md flex flex-col gap-4"
+    >
+      <h2 className="text-xl font-semibold text-gray-700">Add New Task</h2>
 
-return (
-<form onSubmit={handleSubmit} className="mb-4">
-      <div className="flex gap-2">
-        {/* Title input */}
-        <input
-          id="task-title-input"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Add a new task..."
-          className="flex-1 px-3 py-2 rounded-lg bg-gray-700 placeholder-gray-400 text-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        />
+      {/* Task Title */}
+      <input
+        type="text"
+        placeholder="Task title..."
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+      />
 
-        {/* Priority select */}
-        <select
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-          className="px-3 py-2 rounded-lg bg-gray-700 text-gray-100"
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
+      {/* Priority Selector */}
+      <select
+        value={priority}
+        onChange={(e) => setPriority(e.target.value)}
+        className="border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+      >
+        <option value="low">Low Priority</option>
+        <option value="medium">Medium Priority</option>
+        <option value="high">High Priority</option>
+      </select>
 
-        {/* Deadline */}
-        <input
-          type="date"
-          value={deadline}
-          onChange={(e) => setDeadline(e.target.value)}
-          className="px-3 py-2 rounded-lg bg-gray-700 text-gray-100"
-        />
+      {/* Due Date */}
+      <input
+        type="date"
+        value={dueDate}
+        onChange={(e) => setDueDate(e.target.value)}
+        className="border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+      />
 
-        {/* Submit button */}
-        <button
-          type="submit"
-          className="bg-gradient-to-r from-violet-500 to-cyan-400 px-4 py-2 rounded-lg font-semibold hover:opacity-95"
-        >
-          Add
-        </button>
-      </div>
+      {/* Notes */}
+      <textarea
+        placeholder="Add extra notes (optional)"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        className="border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+      />
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        className="bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition"
+      >
+        Add Task
+      </button>
     </form>
   );
 }
