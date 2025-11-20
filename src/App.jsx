@@ -5,6 +5,7 @@ import TaskList from './components/TaskList.jsx'
 import StatsBar from './components/StatsBar.jsx'
 // import Modal from './components/Modal.jsx'
 import FilterBar from './components/FilterBar.jsx'
+import Header from './components/Header.jsx'
 // Remove this line - you don't import the store in App
 // import  UseTaskStore  from './store/taskStore.js'
 
@@ -12,11 +13,12 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-4xl mx-auto space-y-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">My Task Manager</h1>
+        <Header/>
+        <StatsBar/>
         <TaskForm/>
         <FilterBar/>
-        <StatsBar/>
         <TaskList/>
+        
         {/* <Modal/> */}
       </div>
     </div>
