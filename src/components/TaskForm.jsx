@@ -35,7 +35,7 @@ export default function TaskForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-5 rounded-xl shadow-md flex flex-col gap-4"
+      className="bg-orange-50 p-5 rounded-xl shadow-md flex flex-col gap-4"
     >
       <h2 className="text-xl font-semibold text-gray-700">Add New Task</h2>
 
