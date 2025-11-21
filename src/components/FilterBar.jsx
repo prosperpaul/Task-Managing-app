@@ -10,7 +10,7 @@ export default function FilterBar(){
   const setFilter = useTaskStore((state) => state.setFilter)
 
   return(
-    <div className="bg-yellow-50 p-5 rounded-xl shadow-md flex-col md:flex-row gap-4">
+<div className="bg-blue-50 p-5 rounded-xl shadow-md border border-blue-200 flex flex-col md:flex-row gap-4">
       <h3 className='text-lg font-semibold text-gray-700'>Filters:</h3>
 
             {/* Status Filter */}

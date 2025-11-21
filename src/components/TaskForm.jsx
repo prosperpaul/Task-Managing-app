@@ -33,10 +33,10 @@ export default function TaskForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-orange-50 p-5 rounded-xl shadow-md flex flex-col gap-4"
-    >
+<form
+  onSubmit={handleSubmit}
+  className="bg-gradient-to-br from-purple-50 to-blue-50 p-5 rounded-xl shadow-md border border-purple-100 flex flex-col gap-4"
+>
       <h2 className="text-xl font-semibold text-gray-700">Add New Task</h2>
 
       {/* Task Title */}

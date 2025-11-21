@@ -7,7 +7,8 @@ import Header from '../components/Header.jsx'
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    // In App.jsx (or Dashboard.jsx):
+<div className="min-h-screen bg-gray-900-100 via-purple-50 to-pink-50 p-8">
       <div className="max-w-4xl mx-auto space-y-6">
         <Header/>
         <StatsBar/>

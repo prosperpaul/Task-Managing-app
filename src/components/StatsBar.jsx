@@ -14,7 +14,7 @@ export default function StatsBar(){
    const completionPercentage =totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) :0;
 
    return(
-     <div className="bg-white p-5 rounded-xl shadow-md">
+<div className="bg-gradient-to-r from-blue-50 to-purple-50 p-5 rounded-xl shadow-md border border-blue-100">
       <h2 className="text-xl font-semibold text-gray-700 mb-4">Task Statistics</h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

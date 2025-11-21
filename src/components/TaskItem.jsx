@@ -19,11 +19,12 @@ export default function TaskItem({ task }) {
 
   return (
     <>
-      <div
-        className={`p-4 bg-white rounded-xl shadow flex flex-col gap-3 border-l-4 ${
-          task.completed ? "border-green-500 opacity-70" : "border-blue-500"
-        }`}
-      >
+     <div
+  className={`p-4 bg-white/90 
+    backdrop-blur-sm rounded-xl shadow flex flex-col gap-3 border-l-4 ${
+    task.completed ? "border-green-500 opacity-70" : "border-blue-500"
+  }`}
+>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <input
